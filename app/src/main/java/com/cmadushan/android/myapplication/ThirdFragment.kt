@@ -1,10 +1,21 @@
 package com.cmadushan.android.myapplication
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import com.cmadushan.android.myapplication.posts.api.PostApi
+import com.cmadushan.android.myapplication.posts.models.Post
+import com.google.gson.GsonBuilder
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,8 +44,34 @@ class ThirdFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_third, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val gson = GsonBuilder()
+            .create()
+        // Inflate the layout for this fragment
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://jsonplaceholder.typicode.com")
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        var postApi= retrofit.create(PostApi::class.java)
+        var postCall = postApi.post
+        postCall.enqueue(object : Callback<Post>{
+            override fun onResponse(call: Call<Post>, response: Response<Post>) {
+                var title = response.body()!!.title
+                Log.d("third fragment ", "title is: "+title)
+                view.findViewById<TextView>(R.id.title_textview).text=title
+            }
+
+            override fun onFailure(call: Call<Post>, t: Throwable) {
+
+            }
+
+        })
+
     }
 
     companion object {
