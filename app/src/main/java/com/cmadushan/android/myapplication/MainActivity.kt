@@ -8,9 +8,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
-private var view:View?=null;
+private var view:View?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,23 +42,24 @@ private var view:View?=null;
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings ->{
-                view?.let {
-                    Snackbar.make(it,getString(R.string.settings_option),Snackbar.LENGTH_SHORT)
-                            .show()
-                }
-                //toast message
+//                view?.let {
+//                    Snackbar.make(it,getString(R.string.settings_option),Snackbar.LENGTH_SHORT)
+//                            .show()
+//                }
+//                toast message
                 Toast.makeText(applicationContext,getString(R.string.settings_option),Toast.LENGTH_SHORT).show()
                 true
             }
             
             R.id.action_exit->{
-                view?.let {
-                    Snackbar.make(it,getString(R.string.exit_option),Snackbar.LENGTH_SHORT)
-                            .show()
-                }
-                //toast message
-                Toast.makeText(applicationContext,getString(R.string.exit_option),Toast.LENGTH_SHORT).show()
-                true
+//                view?.let {
+//                    Snackbar.make(it,getString(R.string.exit_option),Snackbar.LENGTH_SHORT)
+//                            .show()
+//                }
+//                toast message
+//                Toast.makeText(applicationContext,getString(R.string.exit_option),Toast.LENGTH_SHORT).show()
+                finish()
+                exitProcess(0)
             }
 
             else -> super.onOptionsItemSelected(item)

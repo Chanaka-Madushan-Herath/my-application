@@ -1,5 +1,6 @@
 package com.cmadushan.android.myapplication
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ class DataAdapter(private val inflater: LayoutInflater, private val dataSource: 
         return position.toLong()
     }
 
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val rowView = inflater.inflate(R.layout.list_item, parent, false)
