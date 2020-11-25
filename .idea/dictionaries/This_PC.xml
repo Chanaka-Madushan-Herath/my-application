@@ -2,6 +2,7 @@
   <dictionary name="This PC">
     <words>
       <w>gson</w>
+      <w>restapi</w>
       <w>snackbar</w>
       <w>textview</w>
     </words>
