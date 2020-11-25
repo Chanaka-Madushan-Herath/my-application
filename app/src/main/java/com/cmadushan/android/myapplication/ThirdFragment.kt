@@ -1,11 +1,11 @@
 package com.cmadushan.android.myapplication
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.cmadushan.android.myapplication.posts.api.PostApi
 import com.cmadushan.android.myapplication.posts.models.Post
@@ -59,14 +59,16 @@ class ThirdFragment : Fragment() {
 
         var postApi= retrofit.create(PostApi::class.java)
         var postCall = postApi.post
-        postCall.enqueue(object : Callback<Post>{
-            override fun onResponse(call: Call<Post>, response: Response<Post>) {
-                var title = response.body()!!.title
-                Log.d("third fragment ", "title is: "+title)
-                view.findViewById<TextView>(R.id.title_textview).text=title
+        postCall.enqueue(object : Callback<List<Post>>{
+            override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
+                val listView = view.findViewById<ListView>(R.id.list_view)
+                val adapter =  DataAdapter(
+                    context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,
+                    response.body() as ArrayList<Post>
+                )
+                listView.adapter = adapter
             }
-
-            override fun onFailure(call: Call<Post>, t: Throwable) {
+            override fun onFailure(call: Call<List<Post>>, t: Throwable) {
 
             }
 
