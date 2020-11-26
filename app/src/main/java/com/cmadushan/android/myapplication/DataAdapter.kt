@@ -27,9 +27,17 @@ class DataAdapter(private val inflater: LayoutInflater, private val dataSource: 
 
         val rowView = inflater.inflate(R.layout.list_item, parent, false)
         val titleTextView = rowView.findViewById(R.id.title) as TextView
+        val bodyTextView = rowView.findViewById(R.id.body) as TextView
+        val userIdTextView = rowView.findViewById(R.id.userid) as TextView
+        val idTextView = rowView.findViewById(R.id.id) as TextView
 
         val post = getItem(position) as Post
         titleTextView.text = post.title
+        bodyTextView.text = post.body
+        userIdTextView.text = post.userId.toString()
+        idTextView.text = post.id.toString()
+
+
 
         return rowView
     }

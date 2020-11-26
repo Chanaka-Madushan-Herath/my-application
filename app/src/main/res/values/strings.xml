@@ -16,5 +16,10 @@
     <string name="fab_message">Hi guys how are you</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="id">ID</string>
+    <string name="user_id">User ID</string>
+    <string name="title">Title</string>
+    <string name="body">Body</string>
+    <string name="textview">TextView</string>
 
 </resources>
